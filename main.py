@@ -1,10 +1,20 @@
+from fastapi import FastAPI
+import uvicorn
 import malandriners
 
 
+app = FastAPI()
+
+
+@app.get("/")
 def hello():
-    print("Hello Malandriners")
+    return "Hello Malandriners"
+
+
+@app.get("/happiest")
+def happiest_endpoint():
+    return malandriners.happiest()
 
 
 if __name__ == '__main__':
-    hello()
-    print(malandriners.web())
+    uvicorn.run(app, host="0.0.0.0")
